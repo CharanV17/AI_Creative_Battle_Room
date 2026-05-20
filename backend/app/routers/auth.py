@@ -11,12 +11,8 @@ from app.security import create_session_token, hash_password, verify_password
 router = APIRouter(prefix="/auth", tags=["auth"])
 
 
-def _normalize_role(value: str) -> str:
-    return value if value in {"admin", "player"} else "player"
-
-
 def _user_response(user: User) -> UserResponse:
-    return UserResponse(id=user.id, email=user.email, role=_normalize_role(user.display_name))
+    return UserResponse(id=user.id, email=user.email, display_name=user.display_name, role=user.role)
 
 
 @router.post("/register", response_model=AuthResponse)
@@ -28,7 +24,8 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)):
     user = User(
         email=payload.email,
         password_hash=hash_password(payload.password),
-        display_name=payload.role,
+        display_name=payload.email.split("@")[0],
+        role=payload.role,
     )
     db.add(user)
     db.commit()
@@ -51,7 +48,6 @@ def login(payload: LoginRequest, db: Session = Depends(get_db)):
 @router.post("/register-or-login", response_model=AuthResponse)
 def register_or_login(payload: RegisterRequest, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == payload.email).first()
-
     if user:
         if not verify_password(payload.password, user.password_hash):
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
@@ -59,7 +55,8 @@ def register_or_login(payload: RegisterRequest, db: Session = Depends(get_db)):
         user = User(
             email=payload.email,
             password_hash=hash_password(payload.password),
-            display_name=payload.role,
+            display_name=payload.email.split("@")[0],
+            role=payload.role,
         )
         db.add(user)
         db.commit()
