@@ -301,15 +301,8 @@ def start_round(
     db.commit()
     db.refresh(rnd)
 
-    job = create_generation_job(
-        db,
-        room_id=room.id,
-        round_id=rnd.id,
-        prompt=f"Round {rnd.number} challenge: {room.challenge_prompt}\n\nCreate an exciting, creative opening for this battle round. Be dramatic and inspiring in 2-3 sentences.",
-        timeout_seconds=settings.job_timeout_seconds,
-        provider_name=settings.job_provider,
-    )
-    background_tasks.add_task(run_generation_job, job.id)
+    # No intro AI job — saves one free-tier API call per round.
+    # The challenge prompt at the top of the screen already gives players context.
 
     round_resp = _round_to_response(db, rnd)
     background_tasks.add_task(
