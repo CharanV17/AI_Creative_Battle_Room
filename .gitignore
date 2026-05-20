@@ -1,0 +1,19 @@
+.DS_Store
+Thumbs.db
+
+# frontend
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# backend
+backend/.venv/
+backend/__pycache__/
+backend/*.db
+backend/*.sqlite3
+
+# env files
+.env
+.env.*
+!*.env.example
+
