@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useBattleStore } from './store';
 import type { WsEvent } from './types';
 
-const WS_BASE = process.env.NEXT_PUBLIC_WS_BASE_URL || 'ws://127.0.0.1:8000';
+const WS_BASE = (process.env.NEXT_PUBLIC_WS_BASE_URL || 'ws://127.0.0.1:8000').replace(/\/$/, "");
 const MAX_RETRIES = 5;
 const BASE_DELAY_MS = 1000;
 
