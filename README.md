@@ -15,7 +15,7 @@ python -m venv .venv
 pip install -r requirements.txt
 copy .env.example .env
 # Edit .env and set GEMINI_API_KEY and JOB_PROVIDER=gemini
-uvicorn app.main:app --reload --port 8000
+..\.venv\Scripts\uvicorn.exe app.main:app --reload --port 8000
 ```
 
 ### Frontend
