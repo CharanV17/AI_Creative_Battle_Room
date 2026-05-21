@@ -15,7 +15,7 @@ python -m venv .venv
 pip install -r requirements.txt
 copy .env.example .env
 # Edit .env and set GEMINI_API_KEY and JOB_PROVIDER=gemini
-uvicorn app.main:app --reload --port 8000
+..\.venv\Scripts\uvicorn.exe app.main:app --reload --port 8000
 ```
 
 ### Frontend
@@ -315,6 +315,6 @@ The host **cannot** submit as a contestant — `role == participant` is required
 | ORM | SQLAlchemy 2 | Mature, supports both sync and async patterns |
 | Database | SQLite | Zero-config, sufficient for single-server demo scope |
 | Auth | Session tokens (PBKDF2) | Simple, persistent, no JWT complexity |
-| AI provider | Google Gemini 1.5 Flash | Free tier available, fast, high quality |
+| AI provider | Google Gemini 2.5 Flash | Free tier available, fast, high quality |
 | Realtime | FastAPI native WebSockets | No extra dependencies for single-server setup |
 | Async execution | FastAPI `BackgroundTasks` + `asyncio.to_thread` | Lightweight; job runs async, provider call offloaded to thread pool |
