@@ -190,9 +190,10 @@ The frontend `applyWsEvent()` Zustand reducer handles each event type and patche
                     WS broadcast: job.updated
 ```
 
-Two jobs are created per round:
-1. **Round opener job** — when the host starts a round, Gemini generates a dramatic creative opening for the round context.
-2. **Submission expansion job** — when a participant submits, Gemini expands their concept into a 100–200 word creative output. This is the AI-generated content displayed in the room.
+One job type is executed per submission:
+1. **Submission expansion job** — when a participant submits their concept, Gemini expands it into a 100–200 word creative output. This is the AI-generated content displayed in the room.
+
+*(Note: The decorative "Round opener job" was removed to optimize free-tier Gemini API usage and prevent hitting daily quota limits.)*
 
 Jobs are completely isolated from room state. A failed job does not affect the round or room — participants can still submit, and the host can still close the round.
 

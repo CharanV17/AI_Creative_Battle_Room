@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
+from app.config import settings
 from app.database import Base, engine, SessionLocal
 from app.models import Room, RoomParticipant, Session as UserSession, User
 from app.routers.auth import router as auth_router
@@ -14,14 +15,11 @@ from app.ws_manager import ws_manager
 
 app = FastAPI(title="AI Creative Battle Room API", version="1.0.0")
 
+origins = [o.strip() for o in settings.cors_origins.split(",") if o.strip()]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3001",
-    ],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
