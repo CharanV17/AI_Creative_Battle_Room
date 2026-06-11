@@ -84,11 +84,3 @@ The application leverages **Google Gemini 1.5 Flash** for two critical tasks:
 * **Robust Stability:** Even if the AI model experiences a temporary delay, the platform is designed with fallback safeguards to auto-calculate scores based on submission length, ensuring the game never freezes.
 
 ---
-
-## 5. Printing/Saving this Document as a PDF
-
-You can easily convert this document into a beautifully formatted PDF to share with your clients:
-
-1. Open this file (`client_project_overview.md`) in any Markdown viewer or editor (such as VS Code, Obsidian, or an online Markdown viewer).
-2. Use a "Markdown to PDF" extension or export feature.
-3. Alternatively, open it in a browser, right-click, select **Print**, and choose **Save as PDF** (ensure "Background graphics" is checked in settings to retain colors and borders).
